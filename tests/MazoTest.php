@@ -6,18 +6,23 @@ use PHPUnit\Framework\TestCase;
 
 class MazoTest extends TestCase {
 
-    /**
-     * Valida que se puedan crear mazos de cartas.
-     */
-    public function testExiste() {
+    public function testMezclarVacio() {
         $mazo = new Mazo;
-        $this->assertTrue(isset($mazo));
+        $mazoCpy = $mazo->clone();
+        $mazo->mezclar();
+        $this->assertTrue($mazo->equals($mazoCpy));
     }
 
-    public function testMezclable() {
+    public function testMezclarElem() {
         $mazo = new Mazo;
-        $this->assertTrue($mazo->mezclar());
+        
+        for($i = 0; $i < 100; $i++) {
+            $mazo->add(new Carta(TiposCarta::E_ORO, 1));
+        }
+
+        $mazoCpy = $mazo->clone();
+        $mazo->mezclar();
+        $this->assertFalse($mazo->equals($mazoCpy));
+        $this->assertTrue($mazo->equalsIgnoreOrder($mazoCpy));
     }
-
-
 }
