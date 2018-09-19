@@ -8,7 +8,7 @@ class MazoTest extends TestCase {
 
     public function testMezclarVacio() {
         $mazo = new Mazo;
-        $mazoCpy = $mazo->clone();
+        $mazoCpy = clone $mazo;
         $mazo->mezclar();
         $this->assertTrue($mazo->equals($mazoCpy));
     }
@@ -20,9 +20,20 @@ class MazoTest extends TestCase {
             $mazo->add(new Carta(TiposCarta::E_ORO, 1));
         }
 
-        $mazoCpy = $mazo->clone();
+        $mazoCpy = clone $mazo;
         $mazo->mezclar();
         $this->assertFalse($mazo->equals($mazoCpy));
         $this->assertTrue($mazo->equalsIgnoreOrder($mazoCpy));
+    }
+
+    public function testCloneAndEquals() {
+        $mazo1 = new Mazo();
+        $mazo2 = clone $mazo1;
+        $this->assertTrue($mazo1->equals($mazo2));
+
+        $mazo1 = new Mazo();
+        $mazo2 = clone $mazo1;
+        $mazo1->add(new Carta(TiposCarta::E_ORO));
+        $this->assertFalse($mazo1->equals($mazo2));
     }
 }
