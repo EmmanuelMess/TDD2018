@@ -36,4 +36,47 @@ class MazoTest extends TestCase {
         $mazo1->add(new Carta(TiposCarta::E_ORO));
         $this->assertFalse($mazo1->equals($mazo2));
     }
+
+    public function testContar() {
+        $size = 100;
+
+        $mazo = new Mazo;
+
+        for($i = 0; $i < $size; $i++) {
+            $mazo->add(new Carta(TiposCarta::E_ORO, 1));
+        }
+
+        $this->assertEquals($size, $mazo->size());
+    }
+
+    public function testObtenerN() {
+        $mazo = new Mazo;
+
+        for($i = 0; $i < 100; $i++) {
+            $mazo->add(new Carta(TiposCarta::E_ORO, $i));
+        }
+
+        $this->assertEquals(0, $mazo->get(0)->NUMERO);
+        $this->assertEquals(10, $mazo->get(10)->NUMERO);
+    }
+
+    public function testEmpty() {
+        $mazo = new Mazo;
+
+        $this->assertTrue($mazo->isEmpty());
+
+        for($i = 0; $i < 100; $i++) {
+            $mazo->add(new Carta(TiposCarta::E_ORO, 1));
+        }
+
+        $this->assertFalse($mazo->isEmpty());
+    }
+
+    public function testAdd() {
+        $mazo = new Mazo;
+        $carta = new Carta(TiposCarta::E_ORO, 1);
+        
+        $mazo->add($carta);
+        $this->assertEquals(1, $carta->NUMERO);
+    }
 }
