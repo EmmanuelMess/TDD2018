@@ -13,6 +13,14 @@ class Mazo {
         return TRUE;
     }
 
+    public function cortar() {
+        if($this->size() == 0) return;
+
+        $randIndex = rand(0, $this->size()-1);
+        $start = array_splice($this->cartas, 0, -$randIndex);
+        $this->cartas = array_merge ($this->cartas, $start);
+    }
+
     public function add(Carta $carta) {
         $this->cartas[] = $carta;
     }
