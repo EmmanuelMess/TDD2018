@@ -26,6 +26,19 @@ class MazoTest extends TestCase {
         $this->assertTrue($mazo->equalsIgnoreOrder($mazoCpy));
     }
 
+    public function testCortar() {
+        $mazo = new Mazo;
+
+        for($i = 0; $i < 3; $i++) {
+            $mazo->add(new Carta(TiposCarta::E_ORO, $i));
+        }
+
+        $mazoCpy = clone $mazo;
+        $mazo->cortar();
+        $this->assertFalse($mazo->equals($mazoCpy));
+        $this->assertTrue($mazo->equalsIgnoreOrder($mazoCpy));
+    }
+
     public function testCloneAndEquals() {
         $mazo1 = new Mazo();
         $mazo2 = clone $mazo1;
