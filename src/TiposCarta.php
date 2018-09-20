@@ -13,4 +13,11 @@ abstract class TiposCarta {
     const P_PICA = "pp";
     const P_CORAZON = "pc";
     const P_DIAMANTE = "pd";
+
+    public static function hash(string $tipo): int {
+        $result = 31;
+        $result = 31 * $result + ord($tipo[0]);
+        $result = 31 * $result + ord($tipo[1]);
+        return $result;
+    }
 }

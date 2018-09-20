@@ -33,7 +33,7 @@ class MazoTest extends TestCase {
 
         $mazo1 = new Mazo();
         $mazo2 = clone $mazo1;
-        $mazo1->add(new Carta(TiposCarta::E_ORO));
+        $mazo1->add(new Carta(TiposCarta::E_ORO, 1));
         $this->assertFalse($mazo1->equals($mazo2));
     }
 
